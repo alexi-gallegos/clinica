@@ -4,7 +4,12 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <!-- <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
-                 <font-awesome-icon icon="user" /> <span class="text-capitalize">{{user.name}}</span>
+                <template v-if="user.rol == 0">
+                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize">{{user.nombres}}</span>
+                </template>
+                <template v-else>
+                    <font-awesome-icon icon="user" /> <span class="text-capitalize">{{user.nombres}}</span>
+                </template>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,7 +24,7 @@
                         v-if="user.rol == 0"
                         :to="{name : 'users'}" 
                         :class="this.$route.path == '/users' ? linkActivo : linkInactivo"
-                    >Usuarios</router-link>
+                    >Profesionales</router-link>
                     <a class="nav-item nav-link" href="#">Pricing</a>
                     <div class="dropdown-divider"></div>
                     <li id="link"><a class="nav-item nav-link" @click="logout">Cerrar sesión</a></li>

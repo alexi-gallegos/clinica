@@ -12,14 +12,20 @@
                 data-toggle="modal" 
                 data-target="#ModalNewUser"
             >    
-                <font-awesome-icon icon="user" /> Agregar Usuario
+                <font-awesome-icon icon="user-md" /> Agregar Profesional
             </button>
         </div>          
         <table class="table table-hover text-center mt-2">
             <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Email</th>
+                <th>R.U.T.</th>
+                <th>Nombres</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Dirección</th>
+                <th>Teléfonp</th>
+                <th>E-mail</th>
+                <th>Rol</th>
                 <th>Estado</th>
                 <th></th>
             </tr>
@@ -27,15 +33,21 @@
             <tbody>
                 <template v-if="loading">
                     <tr>
-                        <td colspan="3" class="text-center">
+                        <td colspan="10" class="text-center">
                             <pulse-loader :loading="true" color="black"></pulse-loader>
                         </td>
                     </tr>
                 </template>
                 <template v-else>
                     <tr v-for="(user,index) in dataTable" :key="index">
-                        <td>{{ user.name }}</td>
+                        <td>{{ user.rut }}</td>
+                        <td>{{ user.nombres }}</td>
+                        <td>{{ user.apellido_p }}</td>
+                        <td>{{ user.apellido_m }}</td>
+                        <td>{{ user.direccion }}</td>
+                        <td>{{ user.telefono }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.rol == 0 ? 'Administrador' : 'usuario' }}</td>
                         <td><span class="badge" :class="user.estado == 1 ? 'badge-success' : 'badge-warning'">
                             <span v-if="user.estado == 1">activo</span>
                             <span v-else>inactivo</span>
@@ -111,7 +123,7 @@ export default {
     computed : {
         dataTable(){
             return this.users.filter((user) => {
-                return user.name.match(this.filter) || user.email.match(this.filter)
+                return user.nombres.match(this.filter) || user.email.match(this.filter)
             })
         },
         userCreated(){

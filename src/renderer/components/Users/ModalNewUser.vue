@@ -10,8 +10,28 @@
         </div>
         <div class="modal-body">
             <div class="mt-2">
-                <label>Nombre</label>
-                <input type="text" class="form-control" v-model="nombre">
+                <label>R.U.T.</label>
+                <input type="text" class="form-control" v-model="rut">
+            </div>
+            <div class="mt-2">
+                <label>Nombres</label>
+                <input type="text" class="form-control" v-model="nombres">
+            </div>
+            <div class="mt-2">
+                <label>Apellido Paterno</label>
+                <input type="text" class="form-control" v-model="apellidoP">
+            </div>
+            <div class="mt-2">
+                <label>Apellido Materno</label>
+                <input type="text" class="form-control" v-model="apellidoM">
+            </div>
+            <div class="mt-2">
+                <label>Dirección</label>
+                <input type="text" class="form-control" v-model="direccion">
+            </div>
+            <div class="mt-2">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" v-model="telefono">
             </div>
             <div class="mt-2">
                 <label>E-mail</label>
@@ -41,57 +61,24 @@
 </template>
 
 <script>
+import { methods } from './MethodsModal'
 export default {
     data(){
         return{
             passwordFieldType : 'password',
-            nombre : '',
+            nombres : '',
+            apellidoP : '',
+            apellidoM : '',
+            direccion : '',
+            telefono : '',
+            rut : '',
             email : '',
             password : '',
             loading : false,
             color : 'white'
         }
     },
-    methods : {
-        createUser(){
-            let url = '/user/new_user'
-            this.loading = true
-            if(this.nombre == '' || this.email == '' || this.password == ''){
-                this.$notify({
-                    group: 'foo',
-                    type : 'warn',
-                    title: 'Error',
-                    text: 'Por favor complete todos los campos.'
-                });
-                return
-            }
-            
-            this.$http.post(url,{
-                'nombre' : this.nombre,
-                'email' : this.email,
-                'password' : this.password
-            }).then(res => {
-                console.log(res)
-                this.loading = false
-                this.$notify({
-                    group: 'foo',
-                    type : 'success',
-                    title: 'Bien',
-                    text: 'Usuario creado.'
-                });
-                this.nombre = ''
-                this.email = ''
-                this.password = ''
-                $('#ModalNewUser').modal('hide')
-                this.$store.dispatch('userCreated')
-            }).catch(err => {
-                console.log(err)
-            });
-        },
-         switchVisibility() {
-            this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
-        }
-    }
+    methods
 }
 </script>
 

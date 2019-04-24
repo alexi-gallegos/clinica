@@ -5,14 +5,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser,faEye } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faEye,faUserTie,faUserMd } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Notifications from 'vue-notification'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import Paginate from 'vuejs-paginate'
 
 
-library.add(faUser,faEye)
+library.add(faUser,faEye,faUserTie,faUserMd)
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

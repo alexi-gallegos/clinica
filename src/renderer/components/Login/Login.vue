@@ -19,7 +19,7 @@
                                     <pulse-loader :loading="true" color="white"></pulse-loader>
                                 </template>
                             </button>
-                            <button class="btn btn-success" @click="createAdmin"> crear admin</button>
+                            <!-- <button class="btn btn-success" @click="createAdmin"> crear admin</button> -->
                         </div>
                         <div class="form-group text-center">
                             <router-link :to="{name : 'forgotten'}">¿Olvidaste tu contraseña?</router-link>
@@ -40,16 +40,16 @@ export default {
         }
     },
     methods: {
-        createAdmin(){
-            let url = '/user/create_admin'
+        // createAdmin(){
+        //     let url = '/user/create_admin'
 
-            this.$http.get(url)
-                .then(res => {
-                    console.log(res)
-                }).catch(err => {
-                    console.log(err.response)
-                })
-        },
+        //     this.$http.get(url)
+        //         .then(res => {
+        //             console.log(res)
+        //         }).catch(err => {
+        //             console.log(err)
+        //         })
+        // },
         login(){
             let url = '/auth/login'
             this.loading = true
