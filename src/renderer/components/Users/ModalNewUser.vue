@@ -10,19 +10,19 @@
         </div>
         <div class="modal-body">
             <div class="mt-2">
-                <label>R.U.T.</label>
-                <input type="text" class="form-control" v-model="rut">
+                <label>R.U.T. (*)</label>
+                <input type="text" class="form-control" v-model="rut" placeholder="1234567-8">
             </div>
             <div class="mt-2">
-                <label>Nombres</label>
+                <label>Nombres (*)</label>
                 <input type="text" class="form-control" v-model="nombres">
             </div>
             <div class="mt-2">
-                <label>Apellido Paterno</label>
+                <label>Apellido Paterno (*)</label>
                 <input type="text" class="form-control" v-model="apellidoP">
             </div>
             <div class="mt-2">
-                <label>Apellido Materno</label>
+                <label>Apellido Materno (*)</label>
                 <input type="text" class="form-control" v-model="apellidoM">
             </div>
             <div class="mt-2">
@@ -34,17 +34,24 @@
                 <input type="text" class="form-control" v-model="telefono">
             </div>
             <div class="mt-2">
-                <label>E-mail</label>
+                <label>E-mail (*)</label>
                 <input type="email" class="form-control" v-model="email">
             </div>
-            <label for="password" class="mt-2">Contraseña</label>
+            <div class="mt-2">
+                <label>ROL (*)</label>
+                <select name="" id="" class="form-control" v-model="rol">
+                    <option value="0">Administrador</option>
+                    <option value="1" selected>Usuario</option>
+                </select>
+            </div>
+            <label for="password" class="mt-2">Contraseña (*)</label>
            <div class="input-group mb-3">
                 <input :type="passwordFieldType" id="password" v-model="password" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2" @click="switchVisibility"><font-awesome-icon icon="eye"/></span>
                 </div>
             </div>
-        </div>
+        </div> <!-- BODY -->
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="createUser">
                 <template v-if="!loading">
@@ -62,6 +69,7 @@
 
 <script>
 import { methods } from './MethodsModal'
+import { validate,clean } from 'rut.js'
 export default {
     data(){
         return{
@@ -71,14 +79,27 @@ export default {
             apellidoM : '',
             direccion : '',
             telefono : '',
-            rut : '',
+            rol : '1',
+            rut : null,
             email : '',
             password : '',
             loading : false,
-            color : 'white'
+            color : 'white',
+            validRut : false
         }
     },
-    methods
+    methods ,
+    computed:{
+        cleanRut(){
+            return clean(this.rut)
+        }
+    },
+    watch : {
+        rut(){
+            this.validRut = validate(this.rut)
+            return 
+        }
+    }
 }
 </script>
 

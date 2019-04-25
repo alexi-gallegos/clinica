@@ -2,9 +2,10 @@
         state : {
         token : null,
         num : 1,
-        userCreated : 0,
-        userInfo : []
-},
+        userCreated : 0, //ver el cambio de cuando se agrega un usuario/profesional
+        userInfo : [], //info del usuario que se muestra en el navbar
+        userInfoEdit : [], //info del usuario que se muestra en el modal
+    },  
     getters : {
         token(state){
             return state.token
@@ -20,6 +21,9 @@
         },
         userInfo(state){
             return state.userInfo
+        },
+        userInfoEdit(state){
+            return state.userInfoEdit
         }
 },
     mutations : {
@@ -35,6 +39,9 @@
         },
         SET_USER_INFO(state,userInfo){
             state.userInfo = userInfo
+        },
+        SET_USER_INFO_EDIT(state,userInfo){
+            state.userInfoEdit = userInfo
         }
 },
     actions : {
@@ -49,6 +56,9 @@
         },
         setUserInfo({commit}, userInfo){
             commit('SET_USER_INFO',userInfo)
+        },
+        setUserInfoEdit({commit},userInfo){
+            commit('SET_USER_INFO_EDIT',userInfo)
         }
     }
 }

@@ -1,8 +1,8 @@
 export const methods = {
     createUser(){
         let url = '/user/new_user'
-        this.loading = true
-        if(this.nombre == '' || this.email == '' || this.password == ''){
+        if(this.nombre == '' || this.email == '' || this.password == '' || this.apellidoP == ''
+        || this.apellidoM == '' || this.rut == ''){
             this.$notify({
                 group: 'foo',
                 type : 'warn',
@@ -11,11 +11,25 @@ export const methods = {
             });
             return
         }
-        
+        if(!this.validRut || this.rut.length < 9){
+            this.$notify({
+                group: 'foo',
+                type : 'warn',
+                title: 'Error',
+                text: 'Ingrese un R.U.T. válido.'
+            });
+            return
+        }
+        this.loading = true
         this.$http.post(url,{
-            'nombre' : this.nombre,
+            'rut' : this.cleanRut,
+            'nombres' : this.nombres,
+            'apellidoP' : this.apellidoP,
+            'apellidoM' : this.apellidoM,
+            'direccion' : this.direccion,
+            'telefono' : this.telefono,
             'email' : this.email,
-            'password' : this.password
+            'password' : this.password,
         }).then(res => {
             console.log(res)
             this.loading = false

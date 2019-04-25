@@ -3,12 +3,12 @@
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
-                <!-- <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+                <img src="../../assets/clinica_logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
                 <template v-if="user.rol == 0">
-                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize">{{user.nombres}}</span>
+                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user}}</span>
                 </template>
                 <template v-else>
-                    <font-awesome-icon icon="user" /> <span class="text-capitalize">{{user.nombres}}</span>
+                    <font-awesome-icon  icon="user" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user}}</span>
                 </template>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,6 @@ export default {
 
             this.$http.post(url)
                 .then(res => {
-                    console.log(res)
                     this.$store.dispatch('logout')
                     .then(() => {
                         this.$router.push('/')
@@ -78,4 +77,5 @@ export default {
 #link{
     cursor: pointer;
 }
+
 </style>
