@@ -36,6 +36,19 @@ const router =  new Router({
                   }
                 }
               },
+              {
+                path : '/tratamientos',
+                name : 'tratamientos',
+                meta : {requiresAuth : true},
+                component : require('@/components/Tratamientos/Tratamientos').default,
+                beforeEnter : (to,from,next) => {
+                  if(store.getters.userInfo.rol == 0){
+                    next()
+                  }else{
+                    next(false)
+                  }
+                }
+              }
       ]
     },
     

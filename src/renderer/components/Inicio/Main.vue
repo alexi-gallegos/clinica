@@ -5,7 +5,7 @@
             <a class="navbar-brand" href="#">
                 <img src="../../assets/clinica_logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
                 <template v-if="user.rol == 0">
-                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user}}</span>
+                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user.apellido_p}}</span>
                 </template>
                 <template v-else>
                     <font-awesome-icon  icon="user" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user}}</span>
@@ -19,13 +19,27 @@
                     <router-link 
                         :to="{name : 'main'}" 
                         :class="this.$route.path == '/main' ? linkActivo : linkInactivo"
-                    >Inicio</router-link>
+                        >Inicio
+                    </router-link>
                     <router-link 
                         v-if="user.rol == 0"
                         :to="{name : 'users'}" 
                         :class="this.$route.path == '/users' ? linkActivo : linkInactivo"
-                    >Profesionales</router-link>
+                        >Profesionales
+                    </router-link>
                     <a class="nav-item nav-link" href="#">Pricing</a>
+                     <div class="dropdown">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            Presupuesto
+                        </button>
+                        <div class="dropdown-menu">
+                            <router-link :to="{name : 'tratamientos'}" class="dropdown-item">
+                                Tratamientos
+                            </router-link>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </div>
+                    </div> 
                     <div class="dropdown-divider"></div>
                     <li id="link"><a class="nav-item nav-link" @click="logout">Cerrar sesión</a></li>
                 </div>
@@ -74,8 +88,25 @@ export default {
 .nav-item{
     text-align: right;
 }
+.dropdown{
+    text-align: right;
+}
+.dropdown-menu{
+    text-align: inherit;
+}
+.dropdown-menu {
+    width: 70px;
+    height: 120px;
+    margin-left: auto;
+}
 #link{
     cursor: pointer;
+}
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    text-align: left;
+    }
 }
 
 </style>

@@ -29,7 +29,7 @@
             <pulse-loader :loading="true" color="black"></pulse-loader>
         </div>
         <template v-if="resultsSearch != '' || resultsSearch === 0">
-            <span><strong>{{resultsSearch.length}}</strong> resultado(s)</span>
+            <span v-if="resultsSearch.length >0"> <strong>{{resultsSearch.length}}</strong> resultado(s)</span>
             <button class="btn btn-warning" @click="clearSearch">Limpiar busqueda</button>
             <div v-if="resultsSearch === 0" class="alert alert-danger mt-4 text-center" role="alert">
                 No hay resultados para esta busqueda.
