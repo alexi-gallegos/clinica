@@ -25,7 +25,7 @@
                 </button>
             </div>
         </div>
-        <div class="text-center" v-if="searching">                            
+        <div class="text-center" v-if="searching || loadingButtons">                            
             <pulse-loader :loading="true" color="black"></pulse-loader>
         </div>
         <template v-if="resultsSearch != '' || resultsSearch === 0">
@@ -81,12 +81,7 @@
                                     class="btn btn-sm btn-danger"
                                     @click="deleteUser(user.id)"
                                 >
-                                 <template v-if="loadingDelete">
-                                    <clip-loader :loading="true" size="12px" color="white"></clip-loader>
-                                </template>
-                                <template v-else>
                                     Eliminar
-                                </template>
                                 </button>
                                 <button
                                     v-if="user.rol != 0 && user.estado == 0" 
@@ -94,12 +89,7 @@
                                     class="btn btn-sm btn-success"
                                     @click="activarUser(user.id)"
                                 >
-                                <template v-if="loadingActivate">
-                                    <clip-loader :loading="true" size="12px" color="white"></clip-loader>
-                                </template>
-                                <template v-else>
                                     Activar
-                                </template>
                                 </button>
                                  
                             </div>
@@ -166,12 +156,7 @@
                                     class="btn btn-sm btn-danger"
                                     @click="deleteUser(user.id)"
                                 >
-                                <template v-if="loadingDelete">
-                                    <clip-loader :loading="true" size="12px" color="white"></clip-loader>
-                                </template>
-                                <template v-else>
                                     Eliminar
-                                </template>
                                 </button>
                                 <button
                                     v-if="user.rol != 0 && user.estado == 0" 
@@ -179,12 +164,7 @@
                                     class="btn btn-sm btn-success"
                                     @click="activarUser(user.id)"
                                 >
-                                 <template v-if="loadingActivate">
-                                    <clip-loader :loading="true" size="12px" color="white"></clip-loader>
-                                </template>
-                                <template v-else>
                                     Activar
-                                </template>
                                 </button>
                                 
                             </div>
@@ -243,8 +223,7 @@ export default {
            users : [],
            loading : true,
            searching : false,
-           loadingDelete : false,
-           loadingActivate : false
+           loadingButtons : false
         }
     },
     methods,

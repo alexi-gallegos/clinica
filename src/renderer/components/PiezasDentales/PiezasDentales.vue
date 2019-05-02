@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div class="row">
+       <div class="row">
             <div class="row col-md-9 mt-4 ml-2">
                 <div class="input-group mb-3 col-md-10">
                     <input class="form-control"
@@ -17,41 +17,39 @@
                     data-toggle="modal" 
                     data-target="#ModalNewPiezaDental"
                 >    
-                    <font-awesome-icon icon="receipt" /> Agregar Pieza Dental
+                    <font-awesome-icon icon="tooth" /> Agregar Pieza Dental
                 </button>
             </div>
         </div>
-        <div v-if="loadingDelete">
+        <div v-if="loadingDelete" class="justify-content-center">
             <pulse-loader :loading="true" color="black"></pulse-loader>
         </div>
-        <template v-if="!loading">
-            <div v-if="tratamientos != ''">
+         <template v-if="!loading">
+            <div v-if="piezasDentales != ''">
                 <table class="table table-hover text-center">
                     <thead>
                         <tr>
                         <th scope="col">Código <span id="sort" @click="sort('id')"><font-awesome-icon icon="sort"/></span></th>
-                        <th scope="col">Nombre Tratamiento <span id="sort" @click="sort('tratamiento')"><font-awesome-icon icon="sort"/></span></th>
-                        <th scope="col">Valor Tratamiento <span id="sort" @click="sort('valor')"><font-awesome-icon icon="sort"/></span></th>
+                        <th scope="col">Nombre Tratamiento <span id="sort" @click="sort('pieza_dental')"><font-awesome-icon icon="sort"/></span></th>
                         <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(tratamiento,index) in table" 
+                        <tr v-for="(piezaDental,index) in table" 
                         v-show="(page - 1) * NUM_RESULTS <= index  && page * NUM_RESULTS > index" :key="index">
-                            <td>{{ tratamiento.id }}</td>
-                            <td>{{ tratamiento.tratamiento }}</td>
-                            <td>$ {{ tratamiento.valor.toLocaleString() }}</td>
+                            <td>{{ piezaDental.id }}</td>
+                            <td>{{ piezaDental.pieza_dental }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Botones">
                                     <button 
                                         type="button" 
                                         class="btn btn-warning"
                                         data-toggle="modal" 
-                                        data-target="#ModalEditTratamiento"
-                                        @click="editTratamiento(tratamiento)">
+                                        data-target="#ModalEditPiezaDental"
+                                        @click="editPiezaDental(piezaDental)">
                                         Editar
                                     </button>
-                                    <button type="button" class="btn btn-danger" @click="deleteTratamiento(tratamiento.id)">
+                                    <button type="button" class="btn btn-danger" @click="deletePiezaDental(piezaDental.id)">
                                         Eliminar
                                     </button>
                                 </div>
@@ -98,69 +96,41 @@
                 <pulse-loader :loading="true" color="black"></pulse-loader>
             </div>
         </template>
-
-        <modal-new-tratamiento/>
-        <modal-edit-tratamiento/>
+        <modal-new-pieza-dental/>
+        <modal-edit-pieza-dental/>
     </div>
 </template>
 
 <script>
-import ModalNewTratamiento from './NewTratamientoModal'
-import ModalEditTratamiento from './EditTratamientoModal'
-import { methods } from './Methods'
+import ModalNewPiezaDental from './ModalNewPiezaDental'
+import ModalEditPiezaDental from './ModalEditPiezaDental'
+import {methods, computed} from './Methods'
 export default {
-    data(){
-        return{
-            tratamientos : [],
-            NUM_RESULTS : 5,
-            loading : true,
-            page : 1,
-            totalPages : 0,
+    data() {
+        return {
+            loadingDelete : false,
+            piezasDentales : [],
             filter : '',
+            NUM_RESULTS : 5,
+            page : 1,
+            loading : true,
             currentSort : 'id',
             currentSortDir : 'asc',
-            loadingDelete : false
+
         }
     },
-    methods,
     components : {
-        'modal-new-tratamiento' : ModalNewTratamiento,
-        'modal-edit-tratamiento' : ModalEditTratamiento
+        'modal-new-pieza-dental' : ModalNewPiezaDental,
+        'modal-edit-pieza-dental' : ModalEditPiezaDental
     },
-    computed : {
+    methods ,
+    computed,
+    watch : {
         reloadTable(){
-            return this.$store.getters.reloadTableTratamiento
+            this.getPiezasDentales()
         },
-        table(){
-            return this.tratamientos.filter((tratamiento) => {
-                return tratamiento.tratamiento.toLowerCase().match(this.filter.toLowerCase()) || 
-                    tratamiento.valor.toString().match(this.filter)
-            }).sort((a, b) => {
-                if(this.currentSort == "tratamiento"){
-                    if (this.currentSortDir === 'asc') {
-                    // return a[this.currentSort].toLowerCase() >= b[this.currentSort].toLowerCase();  
-                        return a.tratamiento.localeCompare(b.tratamiento,{sensitivity : 'base'})
-                    }
-                    // return a[this.currentSort].toLowerCase() <= b[this.currentSort].toLowerCase();
-                    return b.tratamiento.localeCompare(a.tratamiento,{sensitivity : 'base'})
-
-                }else{
-                     if (this.currentSortDir === 'asc') {
-                    return a[this.currentSort] - b[this.currentSort];      
-                    }
-                    return b[this.currentSort] - a[this.currentSort]  ;
-                }
-               
-            }) // sort
-        },
-       
-    },
-    watch:{
-        reloadTable(){
-            this.getTratamientos()
-        },
-        tratamientos(){
-            if(this.tratamientos != ''){
+        piezasDentales(){
+            if(this.piezasDentales != ''){
                 $('#filter').prop('readonly', false);
             }else{
                 $('#filter').prop('readonly', true);
@@ -168,7 +138,7 @@ export default {
         }
     },
     mounted(){
-        this.getTratamientos()
+        this.getPiezasDentales()
     }
 }
 </script>

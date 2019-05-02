@@ -1,9 +1,16 @@
 import { app, BrowserWindow } from 'electron'
+import path from 'path'
+import electron from 'electron'
+
+const nativeImage = electron.nativeImage
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
+
+ let icon = nativeImage.createFromPath(path.join(__dirname,'../assets/icon.png'))
+
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
@@ -19,7 +26,8 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({   
     useContentSize: true,
-    show : false
+    show : false,
+    icon: icon
   });
 
   mainWindow.maximize();

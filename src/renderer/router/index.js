@@ -48,6 +48,19 @@ const router =  new Router({
                     next(false)
                   }
                 }
+              },
+              {
+                path : '/piezas',
+                name : 'piezasDentales',
+                meta : {requiresAuth : true},
+                component : require('@/components/PiezasDentales/PiezasDentales').default,
+                beforeEnter : (to,from,next) => {
+                  if(store.getters.userInfo.rol == 0){
+                    next()
+                  }else{
+                    next(false)
+                  }
+                }
               }
       ]
     },

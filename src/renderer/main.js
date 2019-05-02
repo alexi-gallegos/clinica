@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser,faEye,faUserTie,faUserMd, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faEye,faUserTie,faUserMd, faSearch, faReceipt, faSort, faTooth } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Notifications from 'vue-notification'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -13,7 +13,8 @@ import ClipLoader from 'vue-spinner/src/ClipLoader'
 import Paginate from 'vuejs-paginate'
 
 
-library.add(faUser,faEye,faUserTie,faUserMd,faSearch)
+
+library.add(faUser,faEye,faUserTie,faUserMd,faSearch,faReceipt, faSort, faTooth)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('pulse-loader', PulseLoader)

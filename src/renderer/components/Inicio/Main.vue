@@ -33,10 +33,16 @@
                             Presupuesto
                         </button>
                         <div class="dropdown-menu">
-                            <router-link :to="{name : 'tratamientos'}" class="dropdown-item">
+                            <router-link :to="{name : 'tratamientos'}" 
+                                    class="dropdown-item"
+                                    :class="this.$route.path == '/tratamientos' ? 'active' : ''">
                                 Tratamientos
                             </router-link>
-                            <a class="dropdown-item" href="#">Link 2</a>
+                            <router-link :to="{name : 'piezasDentales'}" 
+                                    class="dropdown-item"
+                                    :class="this.$route.path == '/piezas' ? 'active' : ''">
+                                Piezas dentales
+                            </router-link>                            
                             <a class="dropdown-item" href="#">Link 3</a>
                         </div>
                     </div> 

@@ -58,7 +58,7 @@ export const methods = {
         let con = confirm('¿Quieres eliminar este usuario?')
         if(con){
             let url = '/user/delete_user'
-            this.loadingDelete = true
+            this.loadingButtons = true
             this.$http.post(url,{idUsuario : idUsuario})
                 .then(res => {
                     this.$notify({
@@ -83,13 +83,13 @@ export const methods = {
                         })
                     }
                 }).finally(() => {
-                    this.loadingDelete = false
+                    this.loadingButtons = false
                 })
         }
     },
     activarUser(idUsuario){
         let url = '/user/activar_user'
-        this.loadingActivate = true
+        this.loadingButtons = true
         this.$http.post(url,{idUsuario : idUsuario})
             .then(res => {
                 this.$notify({
@@ -113,7 +113,7 @@ export const methods = {
                     })
                 }
             }).finally(() => {
-                this.loadingActivate = false
+                this.loadingButtons = false
             })
     }
 }
