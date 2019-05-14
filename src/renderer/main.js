@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser,faEye,faUserTie,faUserMd, faSearch, faReceipt, faSort, faTooth } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faEye,faUserTie,faUserMd, faSearch, faReceipt, faSort, faTooth, faFileInvoiceDollar, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Notifications from 'vue-notification'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -14,7 +14,7 @@ import Paginate from 'vuejs-paginate'
 
 
 
-library.add(faUser,faEye,faUserTie,faUserMd,faSearch,faReceipt, faSort, faTooth)
+library.add(faUser,faEye,faUserTie,faUserMd,faSearch,faReceipt, faSort, faTooth,faFileInvoiceDollar, faEdit, faTrash)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('pulse-loader', PulseLoader)
@@ -41,7 +41,7 @@ axios.interceptors.response.use((response) => {
   return response;
 }, function (error) {
   // Do something with response error
-  if (error.response.status === 401 && store.getters.token != null) {
+  if (error.response.status === 401 && error.response.data.message == "Token has expired") {
       console.log('unauthorized, logging out ...');
       
       store.dispatch('logout');

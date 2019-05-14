@@ -26,27 +26,31 @@ export const methods = {
             'nombres' : this.nombres,
             'apellidoP' : this.apellidoP,
             'apellidoM' : this.apellidoM,
-            'direccion' : this.direccion,
             'telefono' : this.telefono,
             'email' : this.email,
             'password' : this.password,
         }).then(res => {
             console.log(res)
-            this.loading = false
             this.$notify({
                 group: 'foo',
                 type : 'success',
                 title: 'Bien',
                 text: 'Usuario creado.'
             });
-            this.nombre = ''
-            this.email = ''
-            this.password = ''
             $('#ModalNewUser').modal('hide')
             this.$store.dispatch('userCreated')
         }).catch(err => {
             console.log(err)
-        });
+        }).finally(() => {
+            this.loading = false
+             this.rut = ''
+             this.nombres = ''
+             this.apellidoP = ''
+             this.apellidoM = ''
+             this.telefono = ''
+             this.email = ''
+             this.password = ''
+        })
     },
      switchVisibility() {
         this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'

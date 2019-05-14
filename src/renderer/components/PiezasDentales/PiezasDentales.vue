@@ -6,7 +6,7 @@
                     <input class="form-control"
                            type="text" 
                            id="filter"
-                           placeholder="Buscar por nombre tratamiento o valor. Ej : 10000"
+                           placeholder="Buscar por nombre"
                            v-model="filter"
                            readonly>
                 </div> 
@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                         <th scope="col">Código <span id="sort" @click="sort('id')"><font-awesome-icon icon="sort"/></span></th>
-                        <th scope="col">Nombre Tratamiento <span id="sort" @click="sort('pieza_dental')"><font-awesome-icon icon="sort"/></span></th>
+                        <th scope="col">Nombre Pieza <span id="sort" @click="sort('pieza_dental')"><font-awesome-icon icon="sort"/></span></th>
                         <th scope="col"></th>
                         </tr>
                     </thead>

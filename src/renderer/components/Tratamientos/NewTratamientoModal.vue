@@ -21,6 +21,11 @@
             <input type="text" class="form-control" aria-label="Username" v-model="valorTratamiento" 
             placeholder="Ej: 40.000 o  40000" aria-describedby="basic-addon1">
         </div>
+        <div class="form-check">
+            <label class="form-check-label" for="exampleCheck1">
+            <input type="checkbox" v-model="checked" class="form-check-input" id="exampleCheck1">¿Este procedimiento requiere modulo pieza dental?
+            </label>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -44,7 +49,8 @@ export default {
         return{
             nombreTratamiento : '',
             valorTratamiento : '',
-            loading : false
+            loading : false,
+            checked : false
         }
     },
     methods : {
@@ -64,10 +70,11 @@ export default {
             if(typeof this.valorTratamiento === 'string'){
                 this.valorTratamiento = this.valorTratamiento.replace(/\D/g,'')
             }
-
+        
             this.$http.post(url,{
                 'nombre_tratamiento' : this.nombreTratamiento,
-                'valor_tratamiento' : this.valorTratamiento
+                'valor_tratamiento' : this.valorTratamiento,
+                'pieza_dental' : this.checked
             })
                 .then(res => {
                     console.log(res)
@@ -81,7 +88,9 @@ export default {
                     this.$store.dispatch('reloadTableTratamiento')
                     this.valorTratamiento = ''
                     this.nombreTratamiento = ''
+                    this.checked = false
                 }).catch(err => {
+                    console.log(err)
                     if(err.status == 404 || err.status == 403){
                         this.$notify({
                             group: 'foo',

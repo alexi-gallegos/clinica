@@ -15,9 +15,9 @@
                 <button 
                     class="btn btn-primary mb-sm-2"
                     data-toggle="modal" 
-                    data-target="#ModalNewPiezaDental"
+                    data-target="#ModalNewTratamiento"
                 >    
-                    <font-awesome-icon icon="receipt" /> Agregar Pieza Dental
+                    <font-awesome-icon icon="receipt" /> Agregar Tratamiento
                 </button>
             </div>
         </div>

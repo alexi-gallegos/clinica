@@ -11,6 +11,8 @@
         </button>
       </div>
       <div class="modal-body">
+          <!-- {{info}} -->
+          
         <div class="form-group">
             <label for="tratamiento">Nombre tratamiento</label>
             <input type="text" id="tratamiento" v-model="newNombreTratamiento" class="form-control">
@@ -21,6 +23,11 @@
             </div>
             <input type="text" class="form-control" aria-label="Username" v-model="newValorTratamiento" 
             placeholder="Ej: 40.000 o  40000" aria-describedby="basic-addon1">
+        </div>
+         <div class="form-check">
+            <label class="form-check-label" for="exampleCheck1">
+            <input type="checkbox" v-model="checked" class="form-check-input" id="exampleCheck1">¿Este procedimiento requiere modulo pieza dental?
+            </label>
         </div>
       </div>
       <div class="modal-footer">
@@ -45,6 +52,7 @@ export default {
         return {
             newNombreTratamiento : '',
             newValorTratamiento : '',
+            checked : false,
             loadingSavingChanges : false
         }
     },
@@ -67,7 +75,8 @@ export default {
             this.$http.post(url,{
                 'id' : this.info.id,
                 'new_nombre_tratamiento' : this.newNombreTratamiento,
-                'new_valor_tratamiento' : this.newValorTratamiento
+                'new_valor_tratamiento' : this.newValorTratamiento,
+                'pieza_dental' : this.checked
             }).then(res => {
                     this.$notify({
                     group: 'foo',
@@ -95,6 +104,7 @@ export default {
     computed: {
         info(){
             this.newNombreTratamiento = this.$store.getters.tratamientoEditInfo.tratamiento
+            this.checked = this.$store.getters.tratamientoEditInfo.pieza_dental
             this.newValorTratamiento = this.$store.getters.tratamientoEditInfo.valor
             return this.$store.getters.tratamientoEditInfo
         }

@@ -61,6 +61,53 @@ const router =  new Router({
                     next(false)
                   }
                 }
+              },
+              {
+                path : '/presupuesto',
+                name : 'presupuesto',
+                meta : {requiresAuth : true},
+                component : require('@/components/Presupuesto/Presupuesto').default,
+                beforeEnter : (to,from,next) => {
+                  if(store.getters.userInfo.rol == 0){
+                    next()
+                  }else{
+                    next(false)
+                  }
+                }
+              },
+              {
+                path : '/new-presupuesto',
+                name : 'newPresupuesto',
+                meta : {requiresAuth : true},
+                component : require('@/components/Presupuesto/NewPresupuesto').default,
+                beforeEnter : (to,from,next) => {
+                  if(store.getters.userInfo.rol == 0){
+                    next()
+                  }else{
+                    next(false)
+                  }
+                }
+              },
+              {
+                path : '/pacientes',
+                name : 'pacientes',
+                meta : {requiresAuth : true},
+                component : require('@/components/Pacientes/Pacientes').default,
+                beforeEnter : (to,from,next) => {
+                  if(store.getters.userInfo.rol == 0){
+                    next()
+                  }else{
+                    next(false)
+                  }
+                },
+                children : [
+                  {
+                    path : '/search',
+                    name : 'searchPacientes',
+                    meta : {requiresAuth : true},
+                    component : require('@/components/Pacientes/SearchPacientes').default
+                  }
+                ]
               }
       ]
     },

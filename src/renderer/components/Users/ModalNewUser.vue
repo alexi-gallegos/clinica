@@ -26,10 +26,6 @@
                 <input type="text" class="form-control" v-model="apellidoM">
             </div>
             <div class="mt-2">
-                <label>Dirección</label>
-                <input type="text" class="form-control" v-model="direccion">
-            </div>
-            <div class="mt-2">
                 <label>Teléfono</label>
                 <input type="text" class="form-control" v-model="telefono">
             </div>
@@ -77,7 +73,6 @@ export default {
             nombres : '',
             apellidoP : '',
             apellidoM : '',
-            direccion : '',
             telefono : '',
             rol : '1',
             rut : null,

@@ -5,10 +5,10 @@
             <a class="navbar-brand" href="#">
                 <img src="../../assets/clinica_logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
                 <template v-if="user.rol == 0">
-                    <font-awesome-icon icon="user-tie" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user.apellido_p}}</span>
+                    <font-awesome-icon class="offset-md-2 mt-4" icon="user-tie" /> <span class="text-capitalize ml-2 mt-4">{{user.nombres}} {{user.apellido_p}}</span>
                 </template>
                 <template v-else>
-                    <font-awesome-icon  icon="user" /> <span class="text-capitalize ml-2">{{user.nombres}} {{user}}</span>
+                    <font-awesome-icon class="offset-md-2 mt-4"  icon="user" /> <span class="text-capitalize ml-2 mt-4">{{user.nombres}} {{user}}</span>
                 </template>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,9 +17,9 @@
             <div class="collapse navbar-collapse justify-content-end hidden-xs" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <router-link 
-                        :to="{name : 'main'}" 
-                        :class="this.$route.path == '/main' ? linkActivo : linkInactivo"
-                        >Inicio
+                        :to="{name : 'presupuesto'}" 
+                        :class="this.$route.path == '/presupuesto' || this.$route.path == '/new-presupuesto' ? linkActivo : linkInactivo"
+                        >Presupuesto
                     </router-link>
                     <router-link 
                         v-if="user.rol == 0"
@@ -27,7 +27,12 @@
                         :class="this.$route.path == '/users' ? linkActivo : linkInactivo"
                         >Profesionales
                     </router-link>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
+                     <router-link 
+                        v-if="user.rol == 0"
+                        :to="{name : 'pacientes'}" 
+                        :class="this.$route.path == '/pacientes' ? linkActivo : linkInactivo"
+                        >Pacientes
+                    </router-link>
                      <div class="dropdown">
                         <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                             Presupuesto
@@ -43,7 +48,6 @@
                                     :class="this.$route.path == '/piezas' ? 'active' : ''">
                                 Piezas dentales
                             </router-link>                            
-                            <a class="dropdown-item" href="#">Link 3</a>
                         </div>
                     </div> 
                     <div class="dropdown-divider"></div>
@@ -100,9 +104,10 @@ export default {
 .dropdown-menu{
     text-align: inherit;
 }
+
 .dropdown-menu {
     width: 70px;
-    height: 120px;
+    /* height: 120px; */
     margin-left: auto;
 }
 #link{
@@ -113,6 +118,10 @@ export default {
     position: absolute;
     text-align: left;
     }
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+    border-bottom: 2px solid;
+    border-color: rgb(53, 80, 170);
+}
 }
 
 </style>
